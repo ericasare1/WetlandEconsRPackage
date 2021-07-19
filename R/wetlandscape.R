@@ -1,17 +1,38 @@
-# Hello, world!
-#
-# This is an example function named 'hello'
-# which prints 'Hello, world!'.
-#
-# You can learn more about package authoring with RStudio at:
-#
-#   http://r-pkgs.had.co.nz/
-#
-# Some useful keyboard shortcuts for package authoring:
-#
-#   Install Package:           'Ctrl + Shift + B'
-#   Check Package:             'Ctrl + Shift + E'
-#   Test Package:              'Ctrl + Shift + T'
+
+#' Wetland landscape generator
+#'
+#' @param qsect Integer. Full name is quarter-section and it is the number of
+#' quarter-section (160-acre) farmlands in the sub-basin
+#' @param t1ws_min Integer. It is the minimum wetland size (ha) in the tier 1 group of wetlands in the sub-basin.
+#' @param t1wls_max Integer. It is the maximum wetland size (ha) in the tier 1 group of wetlands in the sub-basin.
+#' @param t3ws_min Integer. It is the minimum wetland size (ha) in the tier 3 group of wetlands in the sub-basin.
+#' @param t3wls_max Integer. It is the maximum wetland size (ha) in the tier 3 group of wetlands in the sub-basin.
+#' @param t6ws_min Integer. It is the minimum wetland size (ha) in the tier 6 group of wetlands in the sub-basin.
+#' @param t6wls_max Integer. It is the maximum wetland size (ha) in the tier 6 group of wetlands in the sub-basin.
+#' @param t12ws_min Integer. It is the minimum wetland size (ha) in the tier 12 group of wetlands in the sub-basin.
+#' @param t12wls_max Integer. It is the maximum wetland size (ha) in the tier 12 group of wetlands in the sub-basin.
+#' @param t24ws_min Integer. It is the minimum wetland size (ha) in the tier 24 group of wetlands in the sub-basin.
+#' @param t24wls_max Integer. It is the maximum wetland size (ha) in the tier 24 group of wetlands in the sub-basin.
+#' @param t1pr_min Integer. It is the minimum probability of harvesting in the tier 1 group of wetlands in the sub-basin.
+#' It is between 0 and 1.
+#' @param t3pr_min Integer. It is the minimum probability of harvesting in the tier 3 group of wetlands in the sub-basin.
+#' It is between 0 and 1.
+#' @param t6pr_min Integer. It is the minimum probability of harvesting in the tier 6 group of wetlands in the sub-basin.
+#' It is between 0 and 1.
+#' @param t12pr_min Integer. It is the minimum probability of harvesting in the tier 12 group of wetlands in the sub-basin.
+#' It is between 0 and 1.
+#' @param t24pr_min Integer. It is the minimum probability of harvesting in the tier 24 group of wetlands in the sub-basin.
+#' It is between 0 and 1.
+#' @param dc_min Integer. It is the minimum drainage cost of wetlands, $/ha.
+#' @param dc_max Integer. It is the maximum drainage cost of wetlands, $/ha.
+#'
+#' @return The output is a dataframe of wetland characteristics in the sub-basin.
+#' @export
+#'
+#' @examples
+#' wetlandscape(qsect = 14000, t1ws_min = 0.1, t1wls_max = 1,
+#' t3ws_min = 0.5, t3wls_max = 2, t6ws_min = 3, t6wls_max = 5, t12ws_min=3, t12wls_max=4,
+#' t24ws_min=2, t24wls_max=6,t1pr_min=0.6, t3pr_min=0.5, t6pr_min=0.6, t12pr_min=0.7, t24pr_min = .9, dc_min = 500, dc_max = 1000)
 
 wetlandscape <- function(qsect, t1ws_min, t1wls_max,  t3ws_min, t3wls_max, t6ws_min, t6wls_max,
                          t12ws_min, t12wls_max, t24ws_min, t24wls_max,
@@ -57,15 +78,10 @@ wetlandscape <- function(qsect, t1ws_min, t1wls_max,  t3ws_min, t3wls_max, t6ws_
   df_wl1 <- rbind(wl_24, wl_12, wl_6, wl_3, wl_1) # Combining all data
 
   df_wl <- df_wl1 %>%
-     mutate(dc = runif(nrow(df_wl1), dc_min, dc_max))
+     dplyr::mutate(dc = runif(nrow(df_wl1), dc_min, dc_max))
 
   return(df_wl)
 
 }
-
-#a <- WetlandEconsRPackage::wetlandscape(qsect = 14000, t1ws_min = 0.1, t1wls_max = 1,  t3ws_min = 0.5, t3wls_max = 2, t6ws_min = 3, t6wls_max = 5,
-                    #    t12ws_min=3, t12wls_max=4, t24ws_min=2, t24wls_max=6,
-                      #  t1pr_min=0.6, t3pr_min=0.5, t6pr_min=0.6, t12pr_min=0.7, t24pr_min = .9,
-                      #  dc_min = 500, dc_max = 1000) %>% View()
 
 

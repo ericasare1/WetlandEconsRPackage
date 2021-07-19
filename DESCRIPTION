@@ -9,9 +9,17 @@ Authors@R: c(
 Maintainer: The package maintainer <eric.asare@usask.ca>
 Description: The package creates a simulated wetland subbasin in Saskatchewan, Canada.  
     It was based on the work of Pomoroy et al. (2002) an Hui et al (2015).
-License: GPL-2
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:
     tidyverse,
+    dplyr,
     triangle
+RoxygenNote: 7.1.1
+Suggests: 
+    rmarkdown,
+    knitr,
+    testthat (>= 3.0.0)
+VignetteBuilder: knitr
+Config/testthat/edition: 3

@@ -12,9 +12,6 @@
 #   Install Package:           'Ctrl + Shift + B'
 #   Check Package:             'Ctrl + Shift + E'
 #   Test Package:              'Ctrl + Shift + T'
-library("triangle")
-library("tidyverse")
-
 
 wetlandscape <- function(qsect, t1ws_min, t1wls_max,  t3ws_min, t3wls_max, t6ws_min, t6wls_max,
                          t12ws_min, t12wls_max, t24ws_min, t24wls_max,
@@ -60,13 +57,15 @@ wetlandscape <- function(qsect, t1ws_min, t1wls_max,  t3ws_min, t3wls_max, t6ws_
   df_wl1 <- rbind(wl_24, wl_12, wl_6, wl_3, wl_1) # Combining all data
 
   df_wl <- df_wl1 %>%
-    mutate(dc = runif(nrow(df_wl1), dc_min, dc_max))
+     mutate(dc = runif(nrow(df_wl1), dc_min, dc_max))
 
   return(df_wl)
 
 }
 
-wetlandscape(qsect = 14000, t1ws_min = 0.1, t1wls_max = 1,  t3ws_min = 0.5, t3wls_max = 2, t6ws_min = 3, t6wls_max = 5,
-                         t12ws_min=3, t12wls_max=4, t24ws_min=2, t24wls_max=6,
-                         t1pr_min=0.6, t3pr_min=0.5, t6pr_min=0.6, t12pr_min=0.7, t24pr_min = .9,
-                         dc_min = 500, dc_max = 100)
+#a <- WetlandEconsRPackage::wetlandscape(qsect = 14000, t1ws_min = 0.1, t1wls_max = 1,  t3ws_min = 0.5, t3wls_max = 2, t6ws_min = 3, t6wls_max = 5,
+                    #    t12ws_min=3, t12wls_max=4, t24ws_min=2, t24wls_max=6,
+                      #  t1pr_min=0.6, t3pr_min=0.5, t6pr_min=0.6, t12pr_min=0.7, t24pr_min = .9,
+                      #  dc_min = 500, dc_max = 1000) %>% View()
+
+

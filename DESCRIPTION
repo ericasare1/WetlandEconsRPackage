@@ -1,11 +1,17 @@
 Package: WetlandEconsRPackage
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Dataframe of wetlands for a subbasin in Saskatchewan
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Authors@R: c(
+    person("Eric", "Asare", email = "eric.asare@usask.ca", role = c("cre", "aut")),
+    person("Kenneth", "Belcher", email = "ken.belcher@usask.ca", role = "aut"),
+    person("Patrick", "Lloyd-Smith", email = "patrick.lloydsmith@usask.ca", role = "aut"))
+Maintainer: The package maintainer <eric.asare@usask.ca>
+Description: The package creates a simulated wetland subbasin in Saskatchewan, Canada.  
+    It was based on the work of Pomoroy et al. (2002) an Hui et al (2015).
+License: GPL-2
 Encoding: UTF-8
 LazyData: true
+Imports:
+    tidyverse,
+    triangle

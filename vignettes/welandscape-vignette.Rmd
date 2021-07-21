@@ -1,5 +1,5 @@
 ---
-title: "welandscape-vignette"
+title: "WetlandEconsRPackage-vignette"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{welandscape-vignette}
@@ -14,6 +14,26 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+
+# **1. Overview**
+
+The 'WetlandEconsRPackage' provides a suite of functions (5 functions) that could be used in concert to analyse the economics of wetland drainage in an agricultural landscape. In this vignette, we will explain how to use all the functions to estimate the net present value of wetland drainage. First, we will explain how to install the package and make it ready for analysis. Second, we will show how to use the first function (wetlandscape) to simulate wetland characteristics in a sub-basin. Third we will show how to use the family of net-present value functions to estimate the net-present value of wetland drainage at the quarter section level and at the higher resolutions. 
+
+# **2. Installation**
+The package can be installed in 2 simple steps. First, install the devtools package. Second, use the devtools to install the package which is stored at github. Finally, we can use the library function to activate the package for analysis.
+
+```{r}
+# step1- install.packages("devtools")
+#Step2-  devtools::install_github("tidyverse/WetlandEconsRPackage")
 library(WetlandEconsRPackage)
+
 ```
+
+
+# **3. Usage**
+The functions that are in the package are wetlandscape, npv_3yrotation, npv_4yrotation, npv_5yrotation, prop_rotation. I urge you to read more about the functions using the help:"?WetlandEconsRPackage::function". For instance, read the wetlandscape function with ?WetlandEconsRPackage::wetlandscape. The help document will show you the parameters in the functions and their meanings. 
+
+## *3.1. Wetlandscape Function*
+The wetland function in the WetlandEconsRPackage is used to simulate wetlands in a sub-basin (a typical Canadian Prairie Pothole region landscape). The simulation is at the quarter section level, which is a farmland 64.75 ha(160 acres) in size. It produces a dataframe with the following columns: a) wetland size (ha), b) wetland groupings (tier), c) probability of harvesting (pr), d) number of wetlands (nwl), e)wetland location(wl_location).  
+  
+  hh

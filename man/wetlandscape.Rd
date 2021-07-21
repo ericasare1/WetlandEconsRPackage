@@ -5,68 +5,74 @@
 \title{Wetland landscape generator}
 \usage{
 wetlandscape(
-  qsect,
-  t1ws_min,
-  t1wls_max,
-  t3ws_min,
-  t3wls_max,
-  t6ws_min,
-  t6wls_max,
-  t12ws_min,
-  t12wls_max,
-  t24ws_min,
-  t24wls_max,
-  t1pr_min,
-  t3pr_min,
-  t6pr_min,
-  t12pr_min,
-  t24pr_min,
+  nq,
+  w1_min,
+  w1_max,
+  w3_min,
+  w3_max,
+  w6_min,
+  w6_max,
+  w12_min,
+  w12_max,
+  w24_min,
+  w24_max,
+  p1_min,
+  p3_min,
+  p6_min,
+  p12_min,
+  p24_min,
   dc_min,
-  dc_max
+  dc_max,
+  nwl_min,
+  nwl_max
 )
 }
 \arguments{
-\item{qsect}{Integer. Full name is quarter-section and it is the number of
-quarter-section (160-acre) farmlands in the sub-basin}
+\item{nq}{Integer. Full name is quarter-section and it is the number of
+quarter-section (160-acre) farmlands in the sub-basin. The minimum number of quarter sections must be 46.}
 
-\item{t1ws_min}{Integer. It is the minimum wetland size (ha) in the tier 1 group of wetlands in the sub-basin.}
+\item{w1_min}{Integer. It is the minimum wetland size (ha) in the tier 1 group of wetlands in the sub-basin.}
 
-\item{t1wls_max}{Integer. It is the maximum wetland size (ha) in the tier 1 group of wetlands in the sub-basin.}
+\item{w1_max}{Integer. It is the maximum wetland size (ha) in the tier 1 group of wetlands in the sub-basin.}
 
-\item{t3ws_min}{Integer. It is the minimum wetland size (ha) in the tier 3 group of wetlands in the sub-basin.}
+\item{w3_min}{Integer. It is the minimum wetland size (ha) in the tier 3 group of wetlands in the sub-basin.}
 
-\item{t3wls_max}{Integer. It is the maximum wetland size (ha) in the tier 3 group of wetlands in the sub-basin.}
+\item{w3_max}{Integer. It is the maximum wetland size (ha) in the tier 3 group of wetlands in the sub-basin.}
 
-\item{t6ws_min}{Integer. It is the minimum wetland size (ha) in the tier 6 group of wetlands in the sub-basin.}
+\item{w6_min}{Integer. It is the minimum wetland size (ha) in the tier 6 group of wetlands in the sub-basin.}
 
-\item{t6wls_max}{Integer. It is the maximum wetland size (ha) in the tier 6 group of wetlands in the sub-basin.}
+\item{w6_max}{Integer. It is the maximum wetland size (ha) in the tier 6 group of wetlands in the sub-basin.}
 
-\item{t12ws_min}{Integer. It is the minimum wetland size (ha) in the tier 12 group of wetlands in the sub-basin.}
+\item{w12_min}{Integer. It is the minimum wetland size (ha) in the tier 12 group of wetlands in the sub-basin.}
 
-\item{t12wls_max}{Integer. It is the maximum wetland size (ha) in the tier 12 group of wetlands in the sub-basin.}
+\item{w12_max}{Integer. It is the maximum wetland size (ha) in the tier 12 group of wetlands in the sub-basin.}
 
-\item{t24ws_min}{Integer. It is the minimum wetland size (ha) in the tier 24 group of wetlands in the sub-basin.}
+\item{w24_min}{Integer. It is the minimum wetland size (ha) in the tier 24 group of wetlands in the sub-basin.}
 
-\item{t24wls_max}{Integer. It is the maximum wetland size (ha) in the tier 24 group of wetlands in the sub-basin.}
+\item{w24_max}{Integer. It is the maximum wetland size (ha) in the tier 24 group of wetlands in the sub-basin.}
 
-\item{t1pr_min}{Integer. It is the minimum probability of harvesting in the tier 1 group of wetlands in the sub-basin.
+\item{p1_min}{Integer. It is the minimum probability of harvesting in the tier 1 group of wetlands in the sub-basin.
 It is between 0 and 1.}
 
-\item{t3pr_min}{Integer. It is the minimum probability of harvesting in the tier 3 group of wetlands in the sub-basin.
+\item{p3_min}{Integer. It is the minimum probability of harvesting in the tier 3 group of wetlands in the sub-basin.
 It is between 0 and 1.}
 
-\item{t6pr_min}{Integer. It is the minimum probability of harvesting in the tier 6 group of wetlands in the sub-basin.
+\item{p6_min}{Integer. It is the minimum probability of harvesting in the tier 6 group of wetlands in the sub-basin.
 It is between 0 and 1.}
 
-\item{t12pr_min}{Integer. It is the minimum probability of harvesting in the tier 12 group of wetlands in the sub-basin.
+\item{p12_min}{Integer. It is the minimum probability of harvesting in the tier 12 group of wetlands in the sub-basin.
 It is between 0 and 1.}
 
-\item{t24pr_min}{Integer. It is the minimum probability of harvesting in the tier 24 group of wetlands in the sub-basin.
+\item{p24_min}{Integer. It is the minimum probability of harvesting in the tier 24 group of wetlands in the sub-basin.
 It is between 0 and 1.}
 
 \item{dc_min}{Integer. It is the minimum drainage cost of wetlands, $/ha.}
 
 \item{dc_max}{Integer. It is the maximum drainage cost of wetlands, $/ha.}
+
+\item{nwl_min}{Integer. The minimum number of wetlands.}
+
+\item{nwl_max}{Integer. The maximum number of wetlands.}
 }
 \value{
 The output is a dataframe of wetland characteristics in the sub-basin.
@@ -75,7 +81,8 @@ The output is a dataframe of wetland characteristics in the sub-basin.
 Wetland landscape generator
 }
 \examples{
-wetlandscape(qsect = 14000, t1ws_min = 0.1, t1wls_max = 1,
-t3ws_min = 0.5, t3wls_max = 2, t6ws_min = 3, t6wls_max = 5, t12ws_min=3, t12wls_max=4,
-t24ws_min=2, t24wls_max=6,t1pr_min=0.6, t3pr_min=0.5, t6pr_min=0.6, t12pr_min=0.7, t24pr_min = .9, dc_min = 500, dc_max = 1000)
+wetlandscape(nq = 14000, w1_min = 0.1, w1_max = 1,
+w3_min = 0.5, w3_max = 2, w6_min = 3, w6_max = 5, w12_min=3, w12_max=4,
+w24_min=2, w24_max=6,p1_min=0.6, p3_min=0.5, p6_min=0.6, p12_min=0.7, p24_min = .9, dc_min = 500, dc_max = 1000,
+nwl_min =2, nwl_max=4)
 }

@@ -13,8 +13,9 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:
-    tidyverse,
     dplyr,
+    purrr,
+    magrittr,
     triangle
 RoxygenNote: 7.1.1
 Suggests: 

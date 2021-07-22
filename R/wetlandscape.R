@@ -41,6 +41,9 @@ wetlandscape <- function(nq, w1_min, w1_max,  w3_min, w3_max, w6_min, w6_max,
                          w12_min, w12_max, w24_min, w24_max,
                          p1_min, p3_min, p6_min, p12_min, p24_min,
                          dc_min, dc_max, nwl_min, nwl_max) {
+
+  loc_id <- wl <-tier <- pr<- dc <- nwl <- wl_location <- NULL
+
   #wetland configuration: 24:12:6:3:1
   tier5 <- 24
   tier4 <- 12

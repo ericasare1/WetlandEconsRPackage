@@ -39,6 +39,7 @@ The wetland function in the WetlandEconsRPackage is used to simulate wetlands in
   
 We follow Pomeroy et al. (2002) to group the wetlands into 5 tiers. The wetland tiers and how they are connected is shown in figure 1 below:  
 
+
 The wetland sizes (ha) for the tiers are created with uniform distribution the wetland minimum size and maximum size parameters (which are controlled by the user). For instance, if I want the wetland sizes in tier 1 to be between 1 and 3 hectares, I will set w1_min = 1 (wetland minimum size) and w1_max = 3 (wetland maximum size).  
   
 Similarly, the probability of harvesting parameter (pr), which shows the probability that a farmer can harvest from a converted wetland, for wetlands in the tiers is controlled bv the user.The parameter is between 0 (minimum pr) and 1 (maximum pr); a parameter of 1 means that the farmer will be able to obtain 100% of crop yield from the drained wetland and 0 means the farmer will get 0 yield from the drained wetland. For instance, if we believe wetlands in tier 1 have probability for wetlands between 50% and 70% we will set the minimum and maximum pr as p1_min = 0.5 and p1_max = 0.7, respectively.  
@@ -78,16 +79,50 @@ Use Case: In this use case we will use a Canola-Spring Wheat-Flax-Barley-Fallow 
                               fallow = 0* runif(nrow(Subbasin_wetlands), 0.6, 1)) %>%
   cbind(Subbasin_wetlands)
   
-npv_parameters <- npv_parameters %>%
-  mutate(
-    npv = unlist(pmap(list(np1= canola_profit, np2= spwheat_profit, np3= flax_profit, np4= barley_profit, np5= fallow, 
+npv <- npv_parameters %>%
+  dplyr::mutate(
+    npv = unlist(purrr::pmap(list(np1= canola_profit, np2= spwheat_profit, np3= flax_profit, np4= barley_profit, np5= fallow, 
                            wl= wl, dc=dc, r=0.87, t=50),npv_5yrotation))
   ) %>%
-  select(wl, npv)
+  dplyr::select(wl, npv)
 
-datatable(npv_parameters)
+datatable(npv)
 
 ```
 
 ## *3.3. Prop_rotation Function*
+The Prop_rotation function works like the yearly rotation functions, but in year year of the rotation multiple crops are cultivated proportional to to drained wetland area. The arguments of the function are crop profits, proportion of wetland areas devoted to a specified crops, wetland size, drainage cost, discount rate and planning horizon.  
+  
+Use Case: We will illustrate this function by maintaining the assumptions in 3.2. The only difference lies in the how the crop rotation is performed yearly. Instead of one crop per year as in 3.2, this function will divide the wetland area among the specified crops.We will use the same data in 3.2.
+
+```{r}
+npv_prop <- npv_parameters %>%
+  dplyr::mutate(
+    npv_proportional = unlist(purrr::pmap(list(
+
+  #crops that are proportionally cultivated on drained wetland for year 1
+  y1np1= canola_profit, y1np2= spwheat_profit, y1np3= flax_profit, y1np4= barley_profit, y1np5= fallow, 
+  y1pwlnp1 = 0.5, y1pwlnp2 = 0.1, y1pwlnp3 = 0.2, y1pwlnp4 = 0.2, y1pwlnp5 = 0, 
+  
+  #crops that are proportionally cultivated on drained wetland for year 2
+  y2np1= canola_profit, y2np2= spwheat_profit, y2np3= flax_profit, y2np4= barley_profit, y2np5= fallow,
+  y2pwlnp1 = 0.3, y2pwlnp2 = 0.2, y2pwlnp3 = 0.2, y2pwlnp4 = 0.3, y2pwlnp5 = 0,                         
+  #crops that are proportionally cultivated on drained wetland for year 3
+  y3np1= canola_profit, y3np2= spwheat_profit, y3np3= flax_profit, y3np4= barley_profit, y3np5= fallow,
+  y3pwlnp1 = 0.2, y3pwlnp2 = 0.5, y3pwlnp3 = 0.2, y3pwlnp4 = 0.1, y3pwlnp5 = 0, 
+  #crops that are proportionally cultivated on drained wetland for year 4
+  y4np1= canola_profit, y4np2= spwheat_profit, y4np3= flax_profit, y4np4= barley_profit, y4np5= fallow,
+  y4pwlnp1 = 0.4, y4pwlnp2 = 0.4, y4pwlnp3 = 0.1, y4pwlnp4 = 0.1, y4pwlnp5 = 0, 
+  #crops that are proportionally cultivated on drained wetland for year 5
+  y5np1= canola_profit, y5np2= spwheat_profit, y5np3= flax_profit, y5np4= barley_profit, y5np5= fallow,
+  y5pwlnp1 = 0.5, y5pwlnp2 = 0.1, y5pwlnp3 = 0.2, y5pwlnp4 = 0.2, y5pwlnp5 = 0, 
+
+  wl = wl,  dc = dc, r = 0.87, t = 50), prop_rotation))
+  ) %>%
+  dplyr::select(wl, npv_proportional)
+
+datatable(npv_prop)
+
+
+```
 
